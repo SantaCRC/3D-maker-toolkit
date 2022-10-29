@@ -11,9 +11,11 @@ def hello_world():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
+    app.config.from_file('config.json', load=json.load)
     app.config['BABEL_DEFAULT_LOCALE'] = 'en'
     babel = Babel(app)
     @babel.localeselector
     def get_locale():
-        return request.accept_languages.best_match(app.config['LANGUAGES'])
+        #return request.accept_languages.best_match(app.config['LANGUAGES'])
+        return 'es'
     app.run(host='0.0.0.0', port=port, debug=True)
