@@ -12,6 +12,13 @@ def hello_world():
 def calculator():
     return render_template('calculator_cost.html')
 
+@app.route('/api/calculator', methods=['POST'])
+def calculator_api():
+    filament_cost = request.form['filament_cost']
+    filament_weight = request.form['filament_weight']
+    filament_length = request.form['filament_length']
+    return json.dumps({'cost': filament_cost * filament_weight * filament_length})
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.config.from_file('config.json', load=json.load)
